@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!-- Standard 'spring-shell' commands -->
+    <bean class="org.springframework.shell.commands.ConsoleCommands" />
+    <bean class="org.springframework.shell.commands.ExitCommands" />
+    <bean class="org.springframework.shell.commands.HelpCommands" />
+    <bean class="org.springframework.shell.commands.InlineCommentCommands" />
+    <bean class="org.springframework.shell.commands.ScriptCommands" />
+
+    <!-- Custom providers -->
+    <bean class="ru.anr.cmdline.base.plugins.CustomBannerProvider" id = "banner"/>
+    <bean class="ru.anr.cmdline.base.plugins.CustomHistoryFileNameProvider" id = "history" />
+    <bean class="ru.anr.cmdline.base.plugins.CustomPromptProvider" id = "prompt"/>
+
+</beans>
