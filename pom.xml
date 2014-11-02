@@ -14,6 +14,29 @@
     <name>Base project for Standalone App</name>
     <description>Base settings and engine for Standalone Application</description>
     
+    <licenses>
+        <license>
+            <name>The MIT License (MIT)</name>
+            <url>http://opensource.org/licenses/MIT</url>
+        </license>
+    </licenses>
+
+    <scm>
+        <connection>scm:git:ssh://@github.com/anr-ru/base.standalone.git</connection>
+        <url>https://github.com/anr-ru/base.standalone/</url>
+        <tag>HEAD</tag>
+    </scm>
+
+    <developers>
+        <developer>
+            <id>alex</id>
+            <name>Alexey Romanchuk</name>
+            <email>alexey.p.romanchuk@gmail.com</email>
+            <timezone>5</timezone>
+        </developer>
+    </developers>    
+    
+    
     <build>
         <plugins>
             <plugin>
