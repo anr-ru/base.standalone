@@ -114,10 +114,10 @@ public class BootstrapImpl extends BaseServiceImpl implements Bootstrap {
         RootBeanDefinition rbd = new RootBeanDefinition();
         rbd.setBeanClass(clazz);
         DefaultListableBeanFactory bf = (DefaultListableBeanFactory) ctx.getBeanFactory();
-        if (name != null) {
-            bf.registerBeanDefinition(name, rbd);
-        } else {
+        if (name == null) {
             bf.registerBeanDefinition(clazz.getSimpleName(), rbd);
+        } else {
+            bf.registerBeanDefinition(name, rbd);
         }
     }
 
@@ -135,7 +135,17 @@ public class BootstrapImpl extends BaseServiceImpl implements Bootstrap {
         JLineShellComponent shell = context.getBean("shell", JLineShellComponent.class);
         ExitShellRequest exitShellRequest;
 
-        if (null != commandsToExecuteAndThenQuit) {
+        if (null == commandsToExecuteAndThenQuit) {
+            shell.start();
+            shell.promptLoop();
+            exitShellRequest = shell.getExitShellRequest();
+            if (exitShellRequest == null) {
+                // shouldn't really happen, but we'll fallback to this anyway
+                exitShellRequest = ExitShellRequest.NORMAL_EXIT;
+            }
+            shell.waitForComplete();
+
+        } else {
             boolean successful = false;
             exitShellRequest = ExitShellRequest.FATAL_EXIT;
 
@@ -150,15 +160,7 @@ public class BootstrapImpl extends BaseServiceImpl implements Bootstrap {
             if (successful) {
                 exitShellRequest = ExitShellRequest.NORMAL_EXIT;
             }
-        } else {
-            shell.start();
-            shell.promptLoop();
-            exitShellRequest = shell.getExitShellRequest();
-            if (exitShellRequest == null) {
-                // shouldn't really happen, but we'll fallback to this anyway
-                exitShellRequest = ExitShellRequest.NORMAL_EXIT;
-            }
-            shell.waitForComplete();
+
         }
 
         sw.stop();

@@ -3,6 +3,7 @@
  */
 package ru.anr.cmdline.base;
 
+import org.apache.commons.lang3.ArrayUtils;
 import org.springframework.boot.SpringApplication;
 import org.springframework.context.annotation.Bean;
 
@@ -34,7 +35,7 @@ public abstract class AbstractCmdApplication extends BaseParent {
      */
     public static void main(AbstractCmdApplication app, String[] args) {
 
-        app.arguments = args;
+        app.arguments = ArrayUtils.clone(args);
         app.run(app.getClass(), args);
     }
 
@@ -68,7 +69,8 @@ public abstract class AbstractCmdApplication extends BaseParent {
     }
 
     /**
-     * Entry point for changing settings
+     * Entry point for changing settings. Must be overriden for custom
+     * initialization.
      * 
      * @param spring
      *            Sprting Boot Runner

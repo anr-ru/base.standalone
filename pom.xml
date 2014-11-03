@@ -102,6 +102,11 @@
             <artifactId>base.services</artifactId>
             <version>${base.services.version}</version>
         </dependency>
+        <dependency>
+            <groupId>ru.anr</groupId>
+            <artifactId>base.tests</artifactId>
+            <version>${base.tests.version}</version>
+        </dependency>
 
         <!-- TESTS -->        
         <dependency>
@@ -114,6 +119,7 @@
     <properties>
         <base.utils.version>0.0.1-SNAPSHOT</base.utils.version>
         <base.services.version>0.0.1-SNAPSHOT</base.services.version>
+        <base.tests.version>0.0.1-SNAPSHOT</base.tests.version>
     </properties>
 
 </project>
