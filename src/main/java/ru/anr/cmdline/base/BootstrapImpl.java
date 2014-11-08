@@ -15,6 +15,7 @@ import org.springframework.beans.factory.support.DefaultListableBeanFactory;
 import org.springframework.beans.factory.support.RootBeanDefinition;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.ClassPathBeanDefinitionScanner;
+import org.springframework.context.annotation.Import;
 import org.springframework.shell.CommandLine;
 import org.springframework.shell.ShellException;
 import org.springframework.shell.SimpleShellCommandLineOptions;
@@ -23,6 +24,7 @@ import org.springframework.shell.core.JLineShellComponent;
 import org.springframework.util.StopWatch;
 
 import ru.anr.base.services.BaseServiceImpl;
+import ru.anr.base.services.MessagePropertiesConfig;
 
 /**
  * An implementation of shell bootstraping. It's rewritten original
@@ -38,7 +40,7 @@ import ru.anr.base.services.BaseServiceImpl;
  * @created Oct 30, 2014
  * 
  */
-
+@Import(MessagePropertiesConfig.class)
 public class BootstrapImpl extends BaseServiceImpl implements Bootstrap {
 
     /**
@@ -56,7 +58,7 @@ public class BootstrapImpl extends BaseServiceImpl implements Bootstrap {
      */
     public BootstrapImpl() {
 
-        this(null);
+        this((String[]) null);
     }
 
     /**
@@ -65,7 +67,7 @@ public class BootstrapImpl extends BaseServiceImpl implements Bootstrap {
      * @param args
      *            Command-line arguments
      */
-    public BootstrapImpl(String[] args) {
+    public BootstrapImpl(String... args) {
 
         super();
         try {

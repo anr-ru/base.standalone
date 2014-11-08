@@ -33,7 +33,7 @@ public abstract class AbstractCmdApplication extends BaseParent {
      * @param args
      *            Initial command-line arguments
      */
-    public static void main(AbstractCmdApplication app, String[] args) {
+    public static void main(AbstractCmdApplication app, String... args) {
 
         app.arguments = ArrayUtils.clone(args);
         app.run(app.getClass(), args);
@@ -60,7 +60,7 @@ public abstract class AbstractCmdApplication extends BaseParent {
      * @param args
      *            Initial command-line arguments
      */
-    protected void run(Class<?> clazz, String[] args) {
+    protected void run(Class<?> clazz, String... args) {
 
         SpringApplication spring = new SpringApplication(clazz);
 
