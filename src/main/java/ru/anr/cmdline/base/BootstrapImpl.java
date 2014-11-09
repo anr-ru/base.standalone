@@ -21,6 +21,8 @@ import org.springframework.shell.ShellException;
 import org.springframework.shell.SimpleShellCommandLineOptions;
 import org.springframework.shell.core.ExitShellRequest;
 import org.springframework.shell.core.JLineShellComponent;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StopWatch;
 
 import ru.anr.base.services.BaseServiceImpl;
@@ -127,6 +129,7 @@ public class BootstrapImpl extends BaseServiceImpl implements Bootstrap {
      * {@inheritDoc}
      */
     @Override
+    @Transactional(propagation = Propagation.REQUIRED)
     public ExitShellRequest run() {
 
         StopWatch sw = new StopWatch("Shell Watch");
