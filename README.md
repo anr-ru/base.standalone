@@ -1,8 +1,9 @@
-The project is licensed under The MIT License (MIT), http://opensource.org/licenses/MIT
+Base.Platform Project
 
-base.standalone
-===============
+=================
+Base.Standalone
+=================
 
-Basic prototype for creating a java command-line applications: both run and exit and 'shell'.
+Basic prototype for creating a java command-line applications: both run and exit and 'shell' mode.
 
-It uses a spring-shell library to work.
+It uses a spring-shell library.
