@@ -2,13 +2,10 @@ package ru.anr.cmdline.base.commands;
 
 import org.junit.Assert;
 import org.junit.Test;
-import org.junit.runner.RunWith;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Configurable;
 import org.springframework.shell.core.CommandResult;
 import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import ru.anr.cmdline.base.AbstractShellTestCase;
 
@@ -20,9 +17,7 @@ import ru.anr.cmdline.base.AbstractShellTestCase;
  * @created Oct 28, 2014
  * 
  */
-@Configurable
 @ContextConfiguration(locations = "classpath*:/tests-plugins.xml")
-@RunWith(SpringJUnit4ClassRunner.class)
 public class SamplesCommandTest extends AbstractShellTestCase {
 
     /**

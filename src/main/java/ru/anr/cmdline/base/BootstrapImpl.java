@@ -1,5 +1,17 @@
-/**
+/*
+ * Copyright 2014 the original author or authors.
  * 
+ * Licensed under the Apache License, Version 2.0 (the "License"); you may not
+ * use this file except in compliance with the License. You may obtain a copy of
+ * the License at
+ * 
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
+ * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
+ * License for the specific language governing permissions and limitations under
+ * the License.
  */
 package ru.anr.cmdline.base;
 
@@ -15,14 +27,18 @@ import org.springframework.beans.factory.support.DefaultListableBeanFactory;
 import org.springframework.beans.factory.support.RootBeanDefinition;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.ClassPathBeanDefinitionScanner;
+import org.springframework.context.annotation.Import;
 import org.springframework.shell.CommandLine;
 import org.springframework.shell.ShellException;
 import org.springframework.shell.SimpleShellCommandLineOptions;
 import org.springframework.shell.core.ExitShellRequest;
 import org.springframework.shell.core.JLineShellComponent;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StopWatch;
 
 import ru.anr.base.services.BaseServiceImpl;
+import ru.anr.base.services.MessagePropertiesConfig;
 
 /**
  * An implementation of shell bootstraping. It's rewritten original
@@ -38,7 +54,7 @@ import ru.anr.base.services.BaseServiceImpl;
  * @created Oct 30, 2014
  * 
  */
-
+@Import(MessagePropertiesConfig.class)
 public class BootstrapImpl extends BaseServiceImpl implements Bootstrap {
 
     /**
@@ -56,7 +72,7 @@ public class BootstrapImpl extends BaseServiceImpl implements Bootstrap {
      */
     public BootstrapImpl() {
 
-        this(null);
+        this((String[]) null);
     }
 
     /**
@@ -65,7 +81,7 @@ public class BootstrapImpl extends BaseServiceImpl implements Bootstrap {
      * @param args
      *            Command-line arguments
      */
-    public BootstrapImpl(String[] args) {
+    public BootstrapImpl(String... args) {
 
         super();
         try {
@@ -85,6 +101,7 @@ public class BootstrapImpl extends BaseServiceImpl implements Bootstrap {
      * Bean initialization. When starting, it tries to find out ant additional
      * plugins, which can be provided in a spring context.
      */
+    @Override
     @PostConstruct
     public void init() {
 
@@ -114,10 +131,10 @@ public class BootstrapImpl extends BaseServiceImpl implements Bootstrap {
         RootBeanDefinition rbd = new RootBeanDefinition();
         rbd.setBeanClass(clazz);
         DefaultListableBeanFactory bf = (DefaultListableBeanFactory) ctx.getBeanFactory();
-        if (name != null) {
-            bf.registerBeanDefinition(name, rbd);
-        } else {
+        if (name == null) {
             bf.registerBeanDefinition(clazz.getSimpleName(), rbd);
+        } else {
+            bf.registerBeanDefinition(name, rbd);
         }
     }
 
@@ -125,6 +142,7 @@ public class BootstrapImpl extends BaseServiceImpl implements Bootstrap {
      * {@inheritDoc}
      */
     @Override
+    @Transactional(propagation = Propagation.REQUIRED)
     public ExitShellRequest run() {
 
         StopWatch sw = new StopWatch("Shell Watch");
@@ -135,7 +153,17 @@ public class BootstrapImpl extends BaseServiceImpl implements Bootstrap {
         JLineShellComponent shell = context.getBean("shell", JLineShellComponent.class);
         ExitShellRequest exitShellRequest;
 
-        if (null != commandsToExecuteAndThenQuit) {
+        if (null == commandsToExecuteAndThenQuit) {
+            shell.start();
+            shell.promptLoop();
+            exitShellRequest = shell.getExitShellRequest();
+            if (exitShellRequest == null) {
+                // shouldn't really happen, but we'll fallback to this anyway
+                exitShellRequest = ExitShellRequest.NORMAL_EXIT;
+            }
+            shell.waitForComplete();
+
+        } else {
             boolean successful = false;
             exitShellRequest = ExitShellRequest.FATAL_EXIT;
 
@@ -150,15 +178,7 @@ public class BootstrapImpl extends BaseServiceImpl implements Bootstrap {
             if (successful) {
                 exitShellRequest = ExitShellRequest.NORMAL_EXIT;
             }
-        } else {
-            shell.start();
-            shell.promptLoop();
-            exitShellRequest = shell.getExitShellRequest();
-            if (exitShellRequest == null) {
-                // shouldn't really happen, but we'll fallback to this anyway
-                exitShellRequest = ExitShellRequest.NORMAL_EXIT;
-            }
-            shell.waitForComplete();
+
         }
 
         sw.stop();
