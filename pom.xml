@@ -4,12 +4,11 @@
     
     <parent>    
         <groupId>ru.anr</groupId>
-        <artifactId>config.java</artifactId>
-        <version>0.9-SNAPSHOT</version>
+        <artifactId>base.platform.parent</artifactId>
+        <version>0.5-SNAPSHOT</version>
     </parent>
     
     <artifactId>base.standalone</artifactId>
-    <version>0.5-SNAPSHOT</version>
 
     <name>Base project for Standalone App</name>
     <description>Base settings and engine for Standalone Application</description>
@@ -36,7 +35,6 @@
         </developer>
     </developers>    
     
-    
     <build>
         <plugins>
             <plugin>
@@ -51,7 +49,6 @@
                             <includes>
                                 <include>**/AbstractShellTestCase*</include>
                             </includes>
-                            <skip>false</skip>
                         </configuration>
                     </execution>
                 </executions>
@@ -60,19 +57,6 @@
     </build>
     
     <dependencies>
-        <!-- Spring framework base -->
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-core</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-beans</artifactId>
-        </dependency>        
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-context</artifactId>
-        </dependency>
         <!-- Spring Boot/Shell -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -95,31 +79,16 @@
         <dependency>
             <groupId>ru.anr</groupId>
             <artifactId>base.utils</artifactId>
-            <version>${base.utils.version}</version>
         </dependency>
         <dependency>
             <groupId>ru.anr</groupId>
             <artifactId>base.services</artifactId>
-            <version>${base.services.version}</version>
         </dependency>
         <dependency>
             <groupId>ru.anr</groupId>
             <artifactId>base.tests</artifactId>
-            <version>${base.tests.version}</version>
-        </dependency>
-
-        <!-- TESTS -->        
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-test</artifactId>
         </dependency>
 
     </dependencies>
-
-    <properties>
-        <base.utils.version>0.5-SNAPSHOT</base.utils.version>
-        <base.services.version>0.5-SNAPSHOT</base.services.version>
-        <base.tests.version>0.5-SNAPSHOT</base.tests.version>
-    </properties>
 
 </project>
