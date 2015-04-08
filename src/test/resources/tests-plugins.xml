@@ -5,8 +5,7 @@
     <!-- Loading 'shell' beans first in a test mode -->
     <bean id = "bootstrap" class="ru.anr.cmdline.base.BootstrapImpl" />
 
-    <!-- Then imporing some settings -->
-    <import resource="classpath:/spring/default-shell-plugins.xml"/>
+    <bean id = "config" class = "ru.anr.cmdline.base.CmdAppConfig" />
     
     <bean class="ru.anr.cmdline.base.commands.SampleCommand" />
 

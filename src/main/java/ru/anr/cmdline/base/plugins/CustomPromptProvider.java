@@ -28,7 +28,7 @@ import org.springframework.stereotype.Component;
  * @created Oct 28, 2014
  * 
  */
-@Component
+@Component("prompt")
 @Order(Ordered.HIGHEST_PRECEDENCE)
 public class CustomPromptProvider implements PromptProvider {
 

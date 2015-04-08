@@ -38,7 +38,7 @@ import org.springframework.stereotype.Component;
  * @created Oct 28, 2014
  * 
  */
-@Component
+@Component("banner")
 @Order(Ordered.HIGHEST_PRECEDENCE)
 public class CustomBannerProvider extends DefaultBannerProvider {
 
@@ -83,6 +83,6 @@ public class CustomBannerProvider extends DefaultBannerProvider {
     @Override
     public String getWelcomeMessage() {
 
-        return "Welcome to application. For command reference type \"help\" then hit ENTER";
+        return "Welcome to Application. For command reference type \"help\" then hit ENTER";
     }
 }

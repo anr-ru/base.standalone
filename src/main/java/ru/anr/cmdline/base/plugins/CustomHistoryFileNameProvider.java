@@ -28,7 +28,7 @@ import org.springframework.stereotype.Component;
  * @created Oct 28, 2014
  * 
  */
-@Component
+@Component("history")
 @Order(Ordered.HIGHEST_PRECEDENCE)
 public class CustomHistoryFileNameProvider implements HistoryFileNameProvider {
 
