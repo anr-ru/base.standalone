@@ -61,7 +61,7 @@ public abstract class AbstractCmdApplication extends BaseParent {
     @Bean(name = "bootstrap", initMethod = "init")
     public Bootstrap getBootstrap() {
 
-        return new BootstrapImpl(this.arguments);
+        return new BootstrapImpl(null, this.arguments);
     }
 
     /**

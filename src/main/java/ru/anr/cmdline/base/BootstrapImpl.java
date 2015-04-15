@@ -72,19 +72,28 @@ public class BootstrapImpl extends BaseServiceImpl implements Bootstrap {
      */
     public BootstrapImpl() {
 
-        this((String[]) null);
+        this(null, (String[]) null);
     }
+
+    /**
+     * Shell component class
+     */
+    private final Class<? extends JLineShellComponent> shellClass;
 
     /**
      * General constructor (original application's arguments are specified)
      * 
+     * @param shellClass
+     *            Class used for the shell component
      * @param args
      *            Command-line arguments
      */
-    public BootstrapImpl(String... args) {
+    public BootstrapImpl(Class<? extends JLineShellComponent> shellClass, String... args) {
 
         super();
         try {
+
+            this.shellClass = (shellClass == null) ? JLineShellComponent.class : shellClass;
             commandLine = SimpleShellCommandLineOptions.parseCommandLine(args);
         } catch (IOException e) {
             throw new ShellException(e.getMessage(), e);
@@ -105,7 +114,7 @@ public class BootstrapImpl extends BaseServiceImpl implements Bootstrap {
     @PostConstruct
     public void init() {
 
-        createAndRegisterBeanDefinition(context, JLineShellComponent.class, "shell");
+        createAndRegisterBeanDefinition(context, shellClass, "shell");
         context.getBeanFactory().registerSingleton("commandLine", commandLine);
 
         // built-in commands and converters
