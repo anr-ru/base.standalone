@@ -34,7 +34,7 @@ public abstract class AbstractCmdApplication extends BaseParent {
     /**
      * Original command-line arguments of the application
      */
-    private String[] arguments;
+    private static String[] arguments;
 
     /**
      * Base initialization. Used here to add some default settings for all
@@ -47,12 +47,12 @@ public abstract class AbstractCmdApplication extends BaseParent {
      */
     public static void main(AbstractCmdApplication app, String... args) {
 
-        app.arguments = ArrayUtils.clone(args);
+        arguments = ArrayUtils.clone(args);
         app.run(app.getClass(), args);
     }
 
     /**
-     * Initialization of {@link Bootstrap} bean, which creates all necessery
+     * Initialization of {@link Bootstrap} bean, which creates all necessary
      * configuration for 'shell'. The original arguments are passed to the bean
      * to perform a 'silent' script execution.
      * 
@@ -61,7 +61,7 @@ public abstract class AbstractCmdApplication extends BaseParent {
     @Bean(name = "bootstrap", initMethod = "init")
     public Bootstrap getBootstrap() {
 
-        return new BootstrapImpl(null, this.arguments);
+        return new BootstrapImpl(null, arguments);
     }
 
     /**
