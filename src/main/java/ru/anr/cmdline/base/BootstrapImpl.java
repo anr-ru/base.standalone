@@ -45,7 +45,7 @@ import ru.anr.base.services.MessagePropertiesConfig;
  * {@link org.springframework.shell.Bootstrap} class from the spring-shell
  * project.
  * 
- * The reason to rewrite was mostly in inconvinient design practice used in
+ * The reason to rewrite was mostly in inconvenient design practice used in
  * {@link org.springframework.shell.Bootstrap} and bad opportunities for
  * extensions.
  * 
