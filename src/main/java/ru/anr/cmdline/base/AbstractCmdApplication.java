@@ -18,6 +18,7 @@ package ru.anr.cmdline.base;
 import org.apache.commons.lang3.ArrayUtils;
 import org.springframework.boot.SpringApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.shell.core.JLineShellComponent;
 
 import ru.anr.base.BaseParent;
 
@@ -52,6 +53,11 @@ public abstract class AbstractCmdApplication extends BaseParent {
     }
 
     /**
+     * Shell component class
+     */
+    private Class<? extends JLineShellComponent> shellClass;
+
+    /**
      * Initialization of {@link Bootstrap} bean, which creates all necessary
      * configuration for 'shell'. The original arguments are passed to the bean
      * to perform a 'silent' script execution.
@@ -61,7 +67,7 @@ public abstract class AbstractCmdApplication extends BaseParent {
     @Bean(name = "bootstrap", initMethod = "init")
     public Bootstrap getBootstrap() {
 
-        return new BootstrapImpl(null, arguments);
+        return new BootstrapImpl(shellClass, arguments);
     }
 
     /**
@@ -91,5 +97,14 @@ public abstract class AbstractCmdApplication extends BaseParent {
 
         spring.setShowBanner(false); // disabled a default banner
         spring.setWebEnvironment(false);
+    }
+
+    /**
+     * @param shellClass
+     *            the shellClass to set
+     */
+    public void setShellClass(Class<? extends JLineShellComponent> shellClass) {
+
+        this.shellClass = shellClass;
     }
 }
