@@ -1,2 +1,8 @@
 /target
-/shell-cmd-history.log
+
+/.settings
+.pmd
+.project
+.classpath
+
+shell-cmd-history.log
