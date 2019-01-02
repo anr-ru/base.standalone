@@ -5,13 +5,14 @@
     <parent>    
         <groupId>ru.anr</groupId>
         <artifactId>base.platform.parent</artifactId>
-        <version>0.5-SNAPSHOT</version>
+        <version>1.0.0</version>
     </parent>
     
     <artifactId>base.standalone</artifactId>
+    <version>1.0.0-SNAPSHOT</version>
 
-    <name>Base project for Standalone App</name>
-    <description>Base settings and engine for Standalone Application</description>
+    <name>Base Standalone Apps</name>
+    <description>Base settings and an engine for creation of Standalone Applications</description>
     
     <licenses>
         <license>
@@ -94,14 +95,17 @@
         <dependency>
             <groupId>ru.anr</groupId>
             <artifactId>base.utils</artifactId>
+            <version>1.0.0</version>
         </dependency>
         <dependency>
             <groupId>ru.anr</groupId>
             <artifactId>base.services</artifactId>
+            <version>1.0.0</version>
         </dependency>
         <dependency>
             <groupId>ru.anr</groupId>
             <artifactId>base.tests</artifactId>
+            <version>1.0.0</version>
         </dependency>
 
     </dependencies>
