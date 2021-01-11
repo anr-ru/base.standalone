@@ -1,23 +1,20 @@
-/**
- * 
- */
 package ru.anr.cmdline;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.ImportResource;
 
 import ru.anr.cmdline.base.AbstractCmdApplication;
+import ru.anr.cmdline.base.HidePasswordShell;
 
 /**
- * Description ...
- *
+ * Sample application configuration.
  *
  * @author Alexey Romanchuk
  * @created Apr 7, 2015
  *
  */
 @Configuration
-@ImportResource("classpath:tests-plugins.xml")
+@ImportResource("classpath:tests-app.xml")
 public class Application extends AbstractCmdApplication {
 
     /**
@@ -27,7 +24,6 @@ public class Application extends AbstractCmdApplication {
      *            Command line args
      */
     public static void main(String... args) {
-
-        AbstractCmdApplication.main(new Application(), args);
+        Application.main(new Application(), HidePasswordShell.class, args);
     }
 }

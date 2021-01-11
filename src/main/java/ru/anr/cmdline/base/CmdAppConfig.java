@@ -15,8 +15,7 @@ import org.springframework.shell.commands.ScriptCommands;
 import ru.anr.cmdline.base.plugins.CustomBannerProvider;
 
 /**
- * Java-based configuration for Shell.
- *
+ * A configuration for used plugins and extensions.
  *
  * @author Alexey Romanchuk
  * @created Apr 7, 2015
@@ -26,57 +25,33 @@ import ru.anr.cmdline.base.plugins.CustomBannerProvider;
 @ComponentScan(basePackageClasses = CustomBannerProvider.class)
 public class CmdAppConfig {
 
-    /**
-     * @return Console command handler
-     */
     @Bean
     public ConsoleCommands consoleCommands() {
-
         return new ConsoleCommands();
     }
 
-    /**
-     * @return Exit command handler
-     */
     @Bean
     public ExitCommands exitCommands() {
-
         return new ExitCommands();
     }
 
-    /**
-     * @return Help command handler
-     */
     @Bean
     public HelpCommands helpCommands() {
-
         return new HelpCommands();
     }
 
-    /**
-     * @return Inline command command (like ';')
-     */
     @Bean
     public InlineCommentCommands inlineCommentCommands() {
-
         return new InlineCommentCommands();
     }
 
-    /**
-     * @return Script command handler
-     */
     @Bean
     public ScriptCommands scriptCommands() {
-
         return new ScriptCommands();
     }
 
-    /**
-     * @return Command line parser
-     */
     @Bean
     public CmdLineParser parser() {
-
         return new CmdLineParser();
     }
 }

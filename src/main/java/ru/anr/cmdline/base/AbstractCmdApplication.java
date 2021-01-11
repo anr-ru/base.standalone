@@ -23,9 +23,8 @@ import org.springframework.shell.core.JLineShellComponent;
 import ru.anr.base.BaseParent;
 
 /**
- * Prototype for an command line application entry point.
- * 
- * 
+ * A prototype for the command line application entry point.
+ *
  * @author Alexey Romanchuk
  * @created Oct 29, 2014
  * 
@@ -43,19 +42,21 @@ public abstract class AbstractCmdApplication extends BaseParent {
      * 
      * @param app
      *            Application instance
+     * @param shell The shell class
      * @param args
      *            Initial command-line arguments
      */
-    public static void main(AbstractCmdApplication app, String... args) {
+    public static void main(AbstractCmdApplication app, Class<? extends HidePasswordShell> shell,  String... args) {
 
         arguments = ArrayUtils.clone(args);
+        shellClass = shell;
         app.run(app.getClass(), args);
     }
 
     /**
      * Shell component class
      */
-    private Class<? extends JLineShellComponent> shellClass;
+    private static Class<? extends HidePasswordShell> shellClass;
 
     /**
      * Initialization of {@link Bootstrap} bean, which creates all necessary
@@ -66,7 +67,6 @@ public abstract class AbstractCmdApplication extends BaseParent {
      */
     @Bean(name = "bootstrap", initMethod = "init")
     public Bootstrap getBootstrap() {
-
         return new BootstrapImpl(shellClass, arguments);
     }
 
@@ -97,14 +97,5 @@ public abstract class AbstractCmdApplication extends BaseParent {
 
         spring.setShowBanner(false); // disabled a default banner
         spring.setWebEnvironment(false);
-    }
-
-    /**
-     * @param shellClass
-     *            the shellClass to set
-     */
-    public void setShellClass(Class<? extends JLineShellComponent> shellClass) {
-
-        this.shellClass = shellClass;
     }
 }

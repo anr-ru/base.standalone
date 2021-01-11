@@ -25,7 +25,7 @@ import org.springframework.shell.core.ExitShellRequest;
 import ru.anr.base.services.BaseServiceImpl;
 
 /**
- * An application specific handler, which starts a command line shell.
+ * A handler that connects the {@link Bootstrap} service with the application and passes it command line arguments.
  * 
  * @author Alexey Romanchuk
  * @created Oct 28, 2014
@@ -33,14 +33,8 @@ import ru.anr.base.services.BaseServiceImpl;
  */
 public class CmdLineParser extends BaseServiceImpl implements CommandLineRunner {
 
-    /**
-     * Logger
-     */
     private static final Logger logger = LoggerFactory.getLogger(CmdLineParser.class);
 
-    /**
-     * {@link Bootstrap} bean
-     */
     @Autowired
     @Qualifier("bootstrap")
     private Bootstrap bootstrap;
@@ -55,5 +49,7 @@ public class CmdLineParser extends BaseServiceImpl implements CommandLineRunner 
 
         ExitShellRequest exitShellRequest = bootstrap.run();
         logger.info("Shell exit code: {}", exitShellRequest.getExitCode());
+
+        System.exit(exitShellRequest.getExitCode());
     }
 }

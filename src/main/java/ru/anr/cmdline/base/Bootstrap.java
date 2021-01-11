@@ -20,8 +20,7 @@ import org.springframework.shell.core.JLineShellComponent;
 
 /**
  * An interface for {@link BootstrapImpl} bean.
- * 
- * 
+ *
  * @author Alexey Romanchuk
  * @created Oct 30, 2014
  * 

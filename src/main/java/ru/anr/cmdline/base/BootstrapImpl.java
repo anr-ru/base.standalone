@@ -31,6 +31,7 @@ import org.springframework.context.annotation.Import;
 import org.springframework.shell.CommandLine;
 import org.springframework.shell.ShellException;
 import org.springframework.shell.SimpleShellCommandLineOptions;
+import org.springframework.shell.core.CommandResult;
 import org.springframework.shell.core.ExitShellRequest;
 import org.springframework.shell.core.JLineShellComponent;
 import org.springframework.transaction.annotation.Propagation;
@@ -41,15 +42,14 @@ import ru.anr.base.services.BaseServiceImpl;
 import ru.anr.base.services.MessagePropertiesConfig;
 
 /**
- * An implementation of shell bootstraping. It's rewritten original
+ * A custom implementation of shell bootstraping. It is a rewritten original
  * {@link org.springframework.shell.Bootstrap} class from the spring-shell
  * project.
  * 
- * The reason to rewrite was mostly in inconvenient design practice used in
+ * The reason to rewrite was mostly in inconvenient design practices used in
  * {@link org.springframework.shell.Bootstrap} and bad opportunities for
  * extensions.
- * 
- * 
+ *
  * @author Alexey Romanchuk
  * @created Oct 30, 2014
  * 
@@ -57,15 +57,12 @@ import ru.anr.base.services.MessagePropertiesConfig;
 @Import(MessagePropertiesConfig.class)
 public class BootstrapImpl extends BaseServiceImpl implements Bootstrap {
 
-    /**
-     * Logger
-     */
     private static final Logger logger = LoggerFactory.getLogger(BootstrapImpl.class);
 
     /**
      * A commmand line storage (prototype for bean)
      */
-    private CommandLine commandLine;
+    private final CommandLine commandLine;
 
     /**
      * Empty constructor (the case when no command line args are provided).
@@ -78,7 +75,7 @@ public class BootstrapImpl extends BaseServiceImpl implements Bootstrap {
     /**
      * Shell component class
      */
-    private final Class<? extends JLineShellComponent> shellClass;
+    private final Class<? extends HidePasswordShell> shellClass;
 
     /**
      * General constructor (original application's arguments are specified)
@@ -88,27 +85,23 @@ public class BootstrapImpl extends BaseServiceImpl implements Bootstrap {
      * @param args
      *            Command-line arguments
      */
-    public BootstrapImpl(Class<? extends JLineShellComponent> shellClass, String... args) {
+    public BootstrapImpl(Class<? extends HidePasswordShell> shellClass, String... args) {
 
         super();
         try {
-
-            this.shellClass = (shellClass == null) ? JLineShellComponent.class : shellClass;
+            this.shellClass = (shellClass == null) ? HidePasswordShell.class : shellClass;
             commandLine = SimpleShellCommandLineOptions.parseCommandLine(args);
         } catch (IOException e) {
             throw new ShellException(e.getMessage(), e);
         }
     }
 
-    /**
-     * Injection of a spring context
-     */
     @Autowired
     private ConfigurableApplicationContext context;
 
     /**
-     * Bean initialization. When starting, it tries to find out ant additional
-     * plugins, which can be provided in a spring context.
+     * Bean initialization. When starting, it tries to find out additional
+     * plugins, which can be provided in the spring context.
      */
     @Override
     @PostConstruct
@@ -158,8 +151,9 @@ public class BootstrapImpl extends BaseServiceImpl implements Bootstrap {
         sw.start();
 
         String[] commandsToExecuteAndThenQuit = commandLine.getShellCommandsToExecute();
-        // The shell is used
-        JLineShellComponent shell = context.getBean("shell", JLineShellComponent.class);
+
+        // The shell to be used
+        HidePasswordShell shell = context.getBean("shell", HidePasswordShell.class);
         ExitShellRequest exitShellRequest;
 
         if (null == commandsToExecuteAndThenQuit) {
@@ -177,8 +171,10 @@ public class BootstrapImpl extends BaseServiceImpl implements Bootstrap {
             exitShellRequest = ExitShellRequest.FATAL_EXIT;
 
             for (String cmd : commandsToExecuteAndThenQuit) {
-                successful = shell.executeCommand(cmd).isSuccess();
+                CommandResult rs = shell.executeCommand(cmd);
+                successful = rs.isSuccess();
                 if (!successful) {
+                    shell.handleError(rs.getException());
                     break;
                 }
             }

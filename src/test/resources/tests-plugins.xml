@@ -3,7 +3,10 @@
     xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
     <!-- Loading 'shell' beans first in a test mode -->
-    <bean id = "bootstrap" class="ru.anr.cmdline.base.BootstrapImpl" />
+    <bean id = "bootstrap" class="ru.anr.cmdline.base.BootstrapImpl" init-method="init">
+        <constructor-arg index="0" value="ru.anr.cmdline.base.HidePasswordShell"/>
+        <constructor-arg index="1" value="[]"/>
+    </bean>
 
     <bean id = "config" class = "ru.anr.cmdline.base.CmdAppConfig" />
     
