@@ -8,3 +8,4 @@
 shell-cmd-history.log
 /.idea/
 /base.standalone.iml
+/spring-shell.log
