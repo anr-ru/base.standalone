@@ -1,5 +1,5 @@
 /*
- * Copyright 2014 the original author or authors.
+ * Copyright 2014-2022 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -23,13 +23,13 @@ import ru.anr.base.BaseParent;
 
 /**
  * A helper service for managing colored output.
- * The idea was used from: https://github.com/dmadunic/clidemo
+ * The idea was used from: <a href="https://github.com/dmadunic/clidemo">...</a>
  *
  * @created Mar 21, 2021
  */
 public class ShellService {
 
-    public static enum PromptColor {
+    public enum PromptColor {
         BLACK(0),
         RED(1),
         GREEN(2),

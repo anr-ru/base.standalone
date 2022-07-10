@@ -1,5 +1,5 @@
 /*
- * Copyright 2014 the original author or authors.
+ * Copyright 2014-2022 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -49,7 +49,7 @@ import ru.anr.cmdline.base.custom.ProgressCounter;
 import ru.anr.cmdline.base.custom.ShellService;
 
 /**
- * A base application configuration.
+ * The base application configuration.
  *
  * @author Alexey Romanchuk
  * @created Oct 29, 2014
@@ -84,7 +84,7 @@ public class AbstractCmdApplication extends BaseParent {
         new AbstractCmdApplication().run(AbstractCmdApplication.class, args);
     }
 
-    ////  Command line configurations, that can be overriden
+    ////  Command line configurations, that can be overridden
 
     @Bean
     public ShellService shellService(@Lazy Terminal terminal) {
@@ -94,7 +94,8 @@ public class AbstractCmdApplication extends BaseParent {
     @Bean("prompt")
     public PromptProvider getPromptProvider() {
         return () -> new AttributedString("CLI:>",
-                AttributedStyle.DEFAULT.foreground(AttributedStyle.BLUE));
+                AttributedStyle.DEFAULT.foreground(AttributedStyle.BLUE)
+        );
     }
 
     @Bean
@@ -103,15 +104,15 @@ public class AbstractCmdApplication extends BaseParent {
             @Lazy Parser parser,
             JLineShellAutoConfiguration.CompleterAdapter completer,
             @Lazy History history,
-            ShellService shellService
-    ) {
+            ShellService shellService) {
         LineReaderBuilder lineReaderBuilder = LineReaderBuilder.builder()
                 .terminal(terminal)
                 .completer(completer)
                 .history(history)
                 .highlighter((LineReader reader, String buffer) ->
-                        new AttributedString(buffer, AttributedStyle.BOLD.foreground(ShellService.PromptColor.WHITE.toJlineAttributedStyle())
-                        )
+                        new AttributedString(buffer,
+                                AttributedStyle.BOLD.foreground(
+                                        ShellService.PromptColor.WHITE.toJlineAttributedStyle()))
                 ).parser(parser);
 
         LineReader lineReader = lineReaderBuilder.build();
@@ -137,7 +138,7 @@ public class AbstractCmdApplication extends BaseParent {
     }
 
     /**
-     * Run procedure with global default settings applied for all applications.
+     * Runs the application with global default settings applied for all applications.
      *
      * @param clazz Class of application module.
      * @param args  Initial command-line arguments
@@ -151,7 +152,7 @@ public class AbstractCmdApplication extends BaseParent {
     }
 
     /**
-     * Entry point for changing settings. Must be overridden for custom
+     * The entry point for initializing settings. Must be overridden for a custom
      * initialization.
      *
      * @param spring Spring Boot Runner
