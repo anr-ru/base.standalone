@@ -13,7 +13,7 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package ru.anr.cmdline.base.custom;
+package ru.anr.base.cmdline.custom;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import ru.anr.base.BaseSpringParent;

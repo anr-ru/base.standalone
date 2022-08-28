@@ -1,4 +1,4 @@
-package ru.anr.cmdline.base;
+package ru.anr.base.cmdline;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Import;
@@ -6,6 +6,7 @@ import org.springframework.shell.CommandRegistry;
 import org.springframework.shell.MethodTarget;
 import org.springframework.shell.Shell;
 import org.springframework.util.ReflectionUtils;
+import ru.anr.base.cmdline.AbstractCmdApplication;
 import ru.anr.base.tests.BaseTestCase;
 
 import javax.validation.constraints.NotNull;

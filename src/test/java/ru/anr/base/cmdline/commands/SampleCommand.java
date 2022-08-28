@@ -1,7 +1,7 @@
 /**
  *
  */
-package ru.anr.cmdline.base.commands;
+package ru.anr.base.cmdline.commands;
 
 import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger;
@@ -10,7 +10,7 @@ import org.springframework.core.io.FileSystemResource;
 import org.springframework.shell.standard.ShellComponent;
 import org.springframework.shell.standard.ShellMethod;
 import org.springframework.shell.standard.ShellOption;
-import ru.anr.cmdline.base.custom.BaseCommand;
+import ru.anr.base.cmdline.custom.BaseCommand;
 
 import java.io.IOException;
 

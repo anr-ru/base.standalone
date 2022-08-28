@@ -13,7 +13,7 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package ru.anr.cmdline.base;
+package ru.anr.base.cmdline;
 
 import org.jline.builtins.Commands;
 import org.jline.reader.History;
@@ -43,10 +43,10 @@ import org.springframework.shell.standard.FileValueProvider;
 import org.springframework.shell.standard.StandardAPIAutoConfiguration;
 import org.springframework.shell.standard.commands.StandardCommandsAutoConfiguration;
 import ru.anr.base.BaseParent;
-import ru.anr.cmdline.base.custom.InputReader;
-import ru.anr.cmdline.base.custom.ProgressBar;
-import ru.anr.cmdline.base.custom.ProgressCounter;
-import ru.anr.cmdline.base.custom.ShellService;
+import ru.anr.base.cmdline.custom.InputReader;
+import ru.anr.base.cmdline.custom.ProgressBar;
+import ru.anr.base.cmdline.custom.ProgressCounter;
+import ru.anr.base.cmdline.custom.ShellService;
 
 /**
  * The base application configuration.

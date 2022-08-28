@@ -1,11 +1,11 @@
-package ru.anr.cmdline.base.commands;
+package ru.anr.base.cmdline.commands;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.context.annotation.Import;
 import org.springframework.shell.MethodTarget;
-import ru.anr.cmdline.Application;
-import ru.anr.cmdline.base.AbstractShellTestCase;
+import ru.anr.base.cmdline.Application;
+import ru.anr.base.cmdline.AbstractShellTestCase;
 
 /**
  * A simple test to check the shell works.

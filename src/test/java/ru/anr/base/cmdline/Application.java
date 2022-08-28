@@ -1,10 +1,9 @@
-package ru.anr.cmdline;
+package ru.anr.base.cmdline;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
-import ru.anr.cmdline.base.AbstractCmdApplication;
-import ru.anr.cmdline.base.commands.SampleCommand;
-import ru.anr.cmdline.base.custom.DemoCommands;
+import ru.anr.base.cmdline.commands.SampleCommand;
+import ru.anr.base.cmdline.custom.DemoCommands;
 
 /**
  * Sample application configuration.
