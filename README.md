@@ -1,11 +1,9 @@
 [![Build Status](https://travis-ci.org/anr-ru/base.standalone.svg?branch=master)](https://travis-ci.org/anr-ru/base.standalone)
 
-Base.Platform Project
+## A part of [Base.Platform Project](https://github.com/anr-ru/base.platform.parent)
 
-=================
-Base.Standalone
-=================
 
-Basic prototype for creating a java command-line applications: both run and exit and 'shell' mode.
+### Base.Standalone
 
-It uses a spring-shell library.
+A basic prototype for creating command-line applications: both 'run-and-exit' and 'shell' modes.
+The project relies on the spring-shell library.
