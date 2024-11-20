@@ -127,9 +127,9 @@
     </dependencies>
 
     <properties>
-        <base.utils.version>2.6.1</base.utils.version>
+        <base.utils.version>2.6.2</base.utils.version>
         <base.tests.version>2.6.1</base.tests.version>
-        <base.services.version>2.6.1</base.services.version>
+        <base.services.version>2.6.2</base.services.version>
 
         <spring.shell.version>2.0.1.RELEASE</spring.shell.version>
         <spring-boot.version>2.7.18</spring-boot.version>
